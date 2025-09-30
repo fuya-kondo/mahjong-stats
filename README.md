@@ -23,8 +23,6 @@
   * ユーザー(`u_user`) ← 階級履歴(`u_tier_history`) → 階級(`m_tier`)
   * ユーザー(`u_user`) → 称号(`m_badge`)
 
-> 現行 DDL は外部キー制約を張っていません（アプリ側で整合性を担保）。本書では**論理的 FK**を明示します。
-
 ---
 
 ## ER 図（Mermaid）
@@ -151,8 +149,8 @@ erDiagram
 | u_table_id        | TINYINT(3) UNSIGNED  | NO   | 0                 | 卓 FK（→ u_table）                     |
 | u_user_id         | TINYINT(3) UNSIGNED  | NO   | 0                 | ユーザー FK（→ u_user）                   |
 | game              | TINYINT(3) UNSIGNED  | NO   | 0                 | 同一卓での試合番号（1,2,3…）                   |
-| m_direction_id    | INT(3) UNSIGNED      | NO   | 0                 | 自家（→ m_direction: 東南西北）             |
-| rank              | VARCHAR(32)          | NO   | 'UNKNOWN'         | 順位。`"1"/"2"/"3"/"4"/同着例 `"2=2"` を許容 |
+| m_direction_id    | INT(3) UNSIGNED      | NO   | 0                 | 自家             |
+| rank              | VARCHAR(32)          | NO   | 'UNKNOWN'         | 順位 |
 | score             | INT(6)               | NO   | 0                 | 素点（終局時スコア）                          |
 | point             | DECIMAL(5,1)         | NO   | 0.0               | 精算ポイント（返し+ウマ適用後）                    |
 | mistake_count     | TINYINT(3) UNSIGNED  | NO   | 0                 | チョンボ回数                              |
@@ -169,7 +167,7 @@ erDiagram
 | ----------- | ------------------- | ---- | ----------------- | ---------------------------- |
 | u_user_id   | TINYINT(3) UNSIGNED | NO   | -                 | PK                           |
 | last_name   | VARCHAR(64)         | NO   | 'UNKNOWN'         | 姓                            |
-| first_name  | VARCHAR(64)         | NO   | 'UNKONWN'         | 名（※既定値に綴り誤りあり。`UNKNOWN` を推奨） |
+| first_name  | VARCHAR(64)         | NO   | 'UNKNOWN'         | 名 |
 | m_tier_id   | TINYINT(3) UNSIGNED | NO   | 0                 | 現在の階級（→ m_tier）              |
 | m_badge_id  | TINYINT(3) UNSIGNED | NO   | 0                 | 現在の称号（→ m_badge）             |
 | reg_date    | DATETIME            | NO   | CURRENT_TIMESTAMP | 登録日時                         |
