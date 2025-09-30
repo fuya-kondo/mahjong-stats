@@ -1,6 +1,6 @@
 # 麻雀成績管理サイト
-* ※開発中
-* ※https://github.com/fuya-kondo/aisai_m_league のLaravel, React版
+* 開発中
+* https://github.com/fuya-kondo/aisai_m_league のLaravel, React版
 
 # 開発環境
 * バックエンド：Laravel（API開発、認証、バリデーション）
