@@ -159,8 +159,6 @@ erDiagram
 | reg_date          | DATETIME             | NO   | '1000-01-01'      | 登録日時                                |
 | update_date       | TIMESTAMP            | NO   | CURRENT_TIMESTAMP | 更新日時（ON UPDATE）                     |
 
-**インデックス**: `PRIMARY KEY (u_game_history_id)`, `KEY idx_game_user (u_user_id)`, `KEY idx_game_play_date (play_date)`, `KEY idx_game_no (game)`
-
 ### 5) u_user — ユーザー
 
 | 列           | 型                   | Null | 既定値               | 説明                           |
@@ -182,38 +180,12 @@ erDiagram
 | m_tier_id              | TINYINT(3) UNSIGNED | NO   | -   | 適用された階級（→ m_tier） |
 | change_date            | YEAR(4)             | NO   | -   | 変更年               |
 
-### 7) m_tier — 階級
-
-| 列         | 型                   | Null | 既定値 | 説明             |
-| --------- | ------------------- | ---- | --- | -------------- |
-| m_tier_id | TINYINT(3) UNSIGNED | NO   | -   | PK             |
-| name      | VARCHAR(32)         | NO   | -   | 階級名（S/A/B/C/D） |
-| color     | VARCHAR(32)         | NO   | -   | 表示色コード（HEX など） |
-
-### 8) m_badge — 称号
-
-| 列          | 型            | Null | 既定値 | 説明       |
-| ---------- | ------------ | ---- | --- | -------- |
-| m_badge_id | TINYINT(3)   | NO   | -   | PK       |
-| name       | VARCHAR(64)  | NO   | -   | 称号名      |
-| image      | VARCHAR(255) | NO   | -   | 画像ファイル名  |
-| flame      | VARCHAR(255) | NO   | -   | 枠（未使用可）  |
-| background | VARCHAR(255) | NO   | -   | 背景（未使用可） |
-
 ### 9) m_direction — 自家（東南西北）
 
 | 列              | 型                   | Null | 既定値 | 説明                        |
 | -------------- | ------------------- | ---- | --- | ------------------------- |
 | m_direction_id | TINYINT(3) UNSIGNED | NO   | -   | PK（1:東 / 2:南 / 3:西 / 4:北） |
 | name           | VARCHAR(64)         | NO   | -   | 表示名                       |
-
-### 10) m_setting — システム設定
-
-| 列            | 型                    | Null | 既定値 | 説明            |
-| ------------ | -------------------- | ---- | --- | ------------- |
-| m_setting_id | TINYINT(3) UNSIGNED  | NO   | -   | PK            |
-| name         | VARCHAR(255)         | NO   | -   | 設定名（例: 点数非表示） |
-| value        | SMALLINT(5) UNSIGNED | NO   | 0   | 値             |
 
 ### 11) Laravel 標準テーブル（抜粋）
 
@@ -236,7 +208,6 @@ erDiagram
 * **ポイント算出**は `m_rule` の `end_score` と `point_1..4` を使用。
 * **同着**は `rank` に `"2=2"` のような文字列表現で保存。
 * **削除**は `del_flag` による論理削除（履歴保全）。
-* **階級**は `u_user` の現在値と履歴テーブル（`u_tier_history`）を併用。
 
 ---
 
