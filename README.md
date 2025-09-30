@@ -1,10 +1,10 @@
 # 麻雀成績管理サイト
 * ※開発中
-* ※https://github.com/fuya-kondo/aisai_m_league のLaravel, Node.js版
+* ※https://github.com/fuya-kondo/aisai_m_league のLaravel, React版
 
 # 開発環境
 * バックエンド：Laravel 12（API開発、認証、バリデーション）
-* フロントエンド：Next.js（SPA構成、UI実装、API連携）
+* フロントエンド：React（Next.js）（SPA構成、UI実装、API連携）
 * データベース：MySQL（設計、集計処理）
 * インフラ/環境：Docker（ローカル環境）、Xserver（本番デプロイ）
 ---
