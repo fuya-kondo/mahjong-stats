@@ -3,9 +3,9 @@
 * https://github.com/fuya-kondo/aisai_m_league のLaravel, React版
 
 # 開発環境
-* バックエンド：Laravel（API開発、認証、バリデーション）
-* フロントエンド：React（Next.js）（SPA構成、UI実装、API連携）
-* データベース：MySQL（設計、集計処理）
+* バックエンド：Laravel
+* フロントエンド：React（Next.js）
+* データベース：MySQL
 * インフラ/環境：Docker（ローカル環境）、Xserver（本番デプロイ）
 ---
 
