@@ -4,25 +4,49 @@ services:
       context: .
       dockerfile: Dockerfile
     image: fuya-kondo-app
-    container_name: fuyakondo_aisaimleague-app
+    container_name: mahjong-stats-app
     ports:
       - "8000:8000"
     volumes:
-      - ./laravel-app:/var/www/html  # ← ここに追加
+      - ./laravel-app:/var/www/html
 
   db:
     image: mysql:8.0
-    container_name: fuyakondo_aisaimleague-db
+    container_name: mahjong-stats-db
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: fuyakondo_aisaimleague
+      MYSQL_DATABASE: mahjong-stats
       MYSQL_USER: laravel
       MYSQL_PASSWORD: secret
     ports:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      restart: always
+      ports:
+        - "8080:80"
+      environment:
+        PMA_HOST: db
+        PMA_USER: laravel
+        PMA_PASSWORD: secret
+
+  frontend:
+      build:
+        context: ./mahjong-frontend
+        dockerfile: Dockerfile
+      container_name: mahjong-stats-frontend
+      ports:
+        - "3000:3000"
+      environment:
+        - NODE_ENV=development
+      volumes:
+        - ./mahjong-frontend:/app
+        - /app/node_modules
+      command: npm run dev
 
 volumes:
   db_data:
